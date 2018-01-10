@@ -539,6 +539,10 @@ class Commands:
             out.append(item)
         return out
 
+    @command('w')
+    def countaddresses(self):
+        return len(self.wallet.get_addresses()
+
     @command('n')
     def gettransaction(self, txid):
         """Retrieve a transaction. """
