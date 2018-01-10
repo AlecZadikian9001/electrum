@@ -541,7 +541,7 @@ class Commands:
 
     @command('w')
     def countaddresses(self):
-        return len(self.wallet.get_addresses()
+        return len(self.wallet.get_addresses())
 
     @command('n')
     def gettransaction(self, txid):
