@@ -617,7 +617,7 @@ class Commands:
         ret = []
         for _ in range(count):
             ret.append(self.wallet.create_new_address(False))
-        return ret
+        return "ok"
 
     @command('w')
     def getunusedaddress(self):
