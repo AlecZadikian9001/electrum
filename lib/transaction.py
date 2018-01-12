@@ -976,6 +976,7 @@ class Transaction:
             'hex': self.raw,
             'complete': self.is_complete(),
             'final': self.is_final(),
+            'outputs': [{"address": addr, "amount": float(v) / 100000000.0} for addr, v in self.outputs()],
         }
         return out
 

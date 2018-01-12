@@ -474,14 +474,17 @@ class Commands:
                     if _addr:
                         addr = _addr
                 input_addresses.append(addr)
+            outputs = []
             for addr, v in tx.get_outputs():
                 output_addresses.append(addr)
+                outputs.append({"address": addr, "amount": float(v) / 100000000.0})
             out.append({
                 'txid': tx_hash,
                 'timestamp': timestamp,
                 'date': date,
                 'input_addresses': input_addresses,
                 'output_addresses': output_addresses,
+                'outputs': outputs,
                 'label': label,
                 'value': str(Decimal(value)/COIN) if value is not None else None,
                 'height': height,
