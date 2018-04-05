@@ -620,6 +620,11 @@ class Commands:
             ret.append(self.wallet.create_new_address(False))
         return "ok"
 
+    @command("w")
+    def change_gap_limit(self, count):
+        self.wallet.change_gap_limit(count)
+        return "ok"
+
     @command('w')
     def getunusedaddress(self):
         """Returns the first unused address of the wallet, or None if all addresses are used.
