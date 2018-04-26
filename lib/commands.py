@@ -613,6 +613,16 @@ class Commands:
         return self.wallet.create_new_address(False)
 
     @command('w')
+    def getgaplimit(self):
+        """Create a new receiving address, beyond the gap limit of the wallet"""
+        return self.wallet.gap_limit
+
+    @command('w')
+    def setgaplimit(self, limit):
+        """Create a new receiving address, beyond the gap limit of the wallet"""
+        return self.wallet.change_gap_limit(limit)
+
+    @command('w')
     def createnewaddresses(self, count):
         """Create a new receiving address, beyond the gap limit of the wallet"""
         ret = []
