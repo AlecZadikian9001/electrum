@@ -122,6 +122,41 @@ class Commands:
         """List of commands"""
         return ' '.join(sorted(known_commands.keys()))
 
+    @command('w')
+    def getgaplimit(self):
+        """Create a new receiving address, beyond the gap limit of the wallet"""
+        return self.wallet.gap_limit
+    
+    @command('w')
+    def setgaplimit(self, limit):
+        """Create a new receiving address, beyond the gap limit of the wallet"""
+        return self.wallet.change_gap_limit(limit)
+
+    @command('w')
+    def createnewaddresses(self, count):
+        """Create a new receiving address, beyond the gap limit of the wallet"""
+        ret = []
+        for _ in range(count):
+            ret.append(self.wallet.create_new_address(False))
+        return "ok"
+
+    @command('w')
+    def countaddresses(self):
+        return len(self.wallet.get_addresses())
+    
+    @command('w')
+    def createnewaddresses(self, count):
+        """Create a new receiving address, beyond the gap limit of the wallet"""
+        ret = []
+        for _ in range(count):
+            ret.append(self.wallet.create_new_address(False))
+        return "ok"
+    
+    @command("w")
+    def change_gap_limit(self, count):
+        self.wallet.change_gap_limit(count)
+        return "ok"
+
     @command('')
     def create(self, segwit=False):
         """Create a new wallet"""
@@ -447,7 +482,7 @@ class Commands:
         return tx.as_dict()
 
     @command('w')
-    def history(self, year=None, show_addresses=False, show_fiat=False):
+    def history(self, year=None, show_addresses=True, show_fiat=False):
         """Wallet history. Returns the transaction history of your wallet."""
         kwargs = {'show_addresses': show_addresses}
         if year:

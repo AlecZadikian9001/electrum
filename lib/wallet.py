@@ -1069,10 +1069,13 @@ class Abstract_Wallet(PrintError):
                     if addr is None:
                         continue
                     input_addresses.append(addr)
+                outputs = []
                 for addr, v in tx.get_outputs():
                     output_addresses.append(addr)
+                    outputs.append({"address": addr, "amount": float(v) / 100000000.0})
                 item['input_addresses'] = input_addresses
                 item['output_addresses'] = output_addresses
+                item['outputs'] = outputs
             # value may be None if wallet is not fully synchronized
             if value is None:
                 continue

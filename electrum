@@ -88,6 +88,11 @@ import electrum_plugins
 
 # get password routine
 def prompt_password(prompt, confirm=True):
+    # override: use envvar if available
+    key = "ELECTRUM_PASSWORD"
+    if key in os.environ:
+        return os.environ[key]
+
     import getpass
     password = getpass.getpass(prompt, stream=None)
     if password and confirm:
