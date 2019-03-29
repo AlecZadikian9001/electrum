@@ -1237,6 +1237,19 @@ class Transaction:
         sig = bh2u(sig) + '01'
         return sig
 
+    def get_outputs(self):
+        """convert pubkeys to addresses"""
+        o = []
+        for type, x, v in self.outputs():
+            if type == TYPE_ADDRESS:
+                addr = x
+            elif type == TYPE_PUBKEY:
+                addr = bitcoin.public_key_to_p2pkh(bfh(x))
+            else:
+                addr = 'SCRIPT ' + x
+            o.append((addr,v))      # consider using yield (addr, v)
+        return o
+
     def get_outputs_for_UI(self) -> Sequence[TxOutputForUI]:
         outputs = []
         for o in self.outputs():
